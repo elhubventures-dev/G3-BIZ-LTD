@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, CheckCircle } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
-import { ContentRenderer } from "@/components/shared/ContentRenderer";
-import { getAllProducts, getPage } from "@/lib/content";
+import { ProductCatalog, ProductHighlights } from "@/components/sections/ProductCatalog";
+import { getAllProducts } from "@/lib/content";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -11,59 +12,96 @@ export const metadata: Metadata = {
   description: `Browse ${siteConfig.shortName}'s product range — Guinness, Smirnoff, Harp, Origin, Malta Guinness and more.`,
 };
 
-const productImages: Record<string, string> = {
-  "big-guinness-l": "/images/uploads/2024/09/2.png",
-  ges: "/images/uploads/2024/09/7.png",
-  origin: "/images/uploads/2024/09/8.png",
-  harp: "/images/uploads/2024/09/3.png",
-  "malta-guiness": "/images/uploads/2024/09/4.png",
-  "small-guinness-s": "/images/uploads/2024/09/1.png",
-  "smirnoff-ice-double-black": "/images/uploads/2024/09/5.png",
-  "smirnoff-ice-pineapple": "/images/uploads/2024/09/6.png",
-};
-
 export default function ProductsPage() {
-  const page = getPage("our-products");
-  const products = getAllProducts();
+  const products = getAllProducts().map((p) => ({
+    slug: p.slug,
+    title: p.title,
+  }));
 
   return (
     <>
       <PageHero
         title="Our Products"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Products" }]}
+        image="/images/uploads/2024/08/GUINNESS-1-696x696-1.png"
       />
+
+      {/* Intro */}
+      <section className="border-b border-brand-border bg-brand-light py-12">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <div>
+              <span className="top-head">Product Range</span>
+              <h2 className="mt-2 font-serif text-3xl font-bold text-brand-heading-alt">
+                Guinness & Diageo brands, delivered with excellence
+              </h2>
+              <p className="mt-4 text-brand-body">
+                As the main GCSA distributor in Limbe, G3-Biz Ltd supplies a full portfolio of
+                trusted beverages to retailers, hospitality venues, and partners across the South
+                West Region.
+              </p>
+              <ul className="mt-6 space-y-2">
+                {[
+                  "Primary & secondary distribution",
+                  "Safe, professional delivery",
+                  "Quarterly bonus programmes",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-brand-heading">
+                    <CheckCircle className="h-4 w-4 shrink-0 text-brand-yellow" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="relative hidden aspect-square max-h-80 justify-self-center lg:block">
+              <Image
+                src="/images/uploads/2024/09/2.png"
+                alt="Guinness products"
+                fill
+                className="object-contain drop-shadow-2xl"
+              />
+            </div>
+          </div>
+          <div className="mt-10">
+            <ProductHighlights />
+          </div>
+        </div>
+      </section>
+
+      {/* Catalog */}
       <section className="py-16">
         <div className="mx-auto max-w-7xl px-4">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {products.map((product) => (
-              <Link
-                key={product.id}
-                href={`/our-products/${product.slug}`}
-                className="group overflow-hidden rounded-2xl bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl"
-              >
-                <div className="flex h-48 items-center justify-center bg-brand-charcoal p-6">
-                  <Image
-                    src={productImages[product.slug] ?? "/images/uploads/2024/09/2.png"}
-                    alt={product.title}
-                    width={100}
-                    height={140}
-                    className="object-contain transition group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-5">
-                  <h2 className="font-bold text-brand-heading group-hover:text-brand-yellow">
-                    {product.title}
-                  </h2>
-                  <p className="mt-2 text-sm text-brand-body">Request a quote →</p>
-                </div>
-              </Link>
-            ))}
-          </div>
-          {page?.html && (
-            <div className="mt-16">
-              <ContentRenderer html={page.html} />
+          <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <h2 className="font-serif text-2xl font-bold text-brand-heading-alt">Browse our catalogue</h2>
+              <p className="mt-1 text-sm text-brand-body">
+                Filter by brand family or request a quote for any product.
+              </p>
             </div>
-          )}
+            <p className="text-sm font-semibold text-brand-body">
+              Showing <span className="text-brand-yellow">{products.length}</span> products
+            </p>
+          </div>
+          <ProductCatalog products={products} />
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-brand-yellow py-12">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 text-center sm:flex-row sm:text-left">
+          <div>
+            <h2 className="font-serif text-2xl font-bold text-white">Need a bulk order or new account?</h2>
+            <p className="mt-1 text-white/85">
+              Contact our depot team for pricing, delivery schedules, and customer registration.
+            </p>
+          </div>
+          <Link
+            href="/contact-us"
+            className="inline-flex shrink-0 items-center gap-2 rounded bg-black px-6 py-3 text-sm font-bold text-white transition hover:bg-black/85"
+          >
+            Request a Quote
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
     </>

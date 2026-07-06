@@ -2,20 +2,16 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
 import { getAllProducts, getProduct } from "@/lib/content";
+import {
+  getProductCategory,
+  getProductDescription,
+  getProductImage,
+  productCategories,
+} from "@/lib/products";
 import { siteConfig } from "@/config/site";
-
-const productImages: Record<string, string> = {
-  "big-guinness-l": "/images/uploads/2024/09/2.png",
-  ges: "/images/uploads/2024/09/7.png",
-  origin: "/images/uploads/2024/09/8.png",
-  harp: "/images/uploads/2024/09/3.png",
-  "malta-guiness": "/images/uploads/2024/09/4.png",
-  "small-guinness-s": "/images/uploads/2024/09/1.png",
-  "smirnoff-ice-double-black": "/images/uploads/2024/09/5.png",
-  "smirnoff-ice-pineapple": "/images/uploads/2024/09/6.png",
-};
 
 export async function generateStaticParams() {
   return getAllProducts().map((p) => ({ slug: p.slug }));
@@ -30,7 +26,7 @@ export async function generateMetadata({
   const product = getProduct(slug);
   return {
     title: product?.title ?? "Product",
-    description: `${product?.title} — available from ${siteConfig.shortName}, Limbe Cameroon.`,
+    description: getProductDescription(slug, product?.title),
   };
 }
 
@@ -43,6 +39,11 @@ export default async function ProductDetailPage({
   const product = getProduct(slug);
   if (!product) notFound();
 
+  const category = getProductCategory(slug);
+  const categoryLabel = productCategories.find((c) => c.id === category)?.label;
+  const description = getProductDescription(slug, product.text);
+  const image = getProductImage(slug, product.image);
+
   return (
     <>
       <PageHero
@@ -54,26 +55,54 @@ export default async function ProductDetailPage({
         ]}
       />
       <section className="py-16">
-        <div className="mx-auto max-w-4xl px-4">
-          <div className="flex flex-col items-center gap-8 md:flex-row">
-            <div className="flex h-64 w-64 items-center justify-center rounded-2xl bg-brand-charcoal p-8">
+        <div className="mx-auto max-w-7xl px-4">
+          <Link
+            href="/our-products"
+            className="mb-8 inline-flex items-center gap-1 text-sm font-semibold text-brand-heading hover:text-brand-yellow"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to products
+          </Link>
+
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div className="flex items-center justify-center rounded-2xl border border-brand-border bg-gradient-to-b from-black to-[#1a1a1a] p-12 shadow-lg">
               <Image
-                src={productImages[product.slug] ?? "/images/uploads/2024/09/2.png"}
+                src={image}
                 alt={product.title}
-                width={160}
-                height={220}
-                className="object-contain"
+                width={200}
+                height={280}
+                className="object-contain drop-shadow-2xl"
               />
             </div>
-            <div className="flex-1">
-              <h2 className="font-serif text-2xl font-bold text-brand-heading">{product.title}</h2>
-              {product.text && <p className="mt-4 text-brand-body">{product.text}</p>}
-              <Link
-                href="/contact-us"
-                className="mt-6 btn-primary"
-              >
-                Request a Quote
-              </Link>
+
+            <div>
+              {categoryLabel && (
+                <span className="inline-block rounded-full bg-brand-light px-3 py-1 text-xs font-bold uppercase tracking-wider text-brand-yellow">
+                  {categoryLabel}
+                </span>
+              )}
+              <h2 className="mt-3 font-serif text-3xl font-bold text-brand-heading">{product.title}</h2>
+              <p className="mt-4 text-lg leading-relaxed text-brand-body">{description}</p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href="/contact-us" className="btn-primary gap-2">
+                  Request a Quote
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/services/reputable-customer-of-gcsa"
+                  className="inline-flex items-center justify-center rounded-sm border-2 border-brand-charcoal px-6 py-3 text-sm font-bold text-brand-charcoal transition hover:bg-brand-charcoal hover:text-white"
+                >
+                  Become a Customer
+                </Link>
+              </div>
+
+              <p className="mt-8 text-sm text-brand-body">
+                Distributed by {siteConfig.shortName} · Mile 2, Limbe ·{" "}
+                <a href={`tel:${siteConfig.phone}`} className="font-semibold text-brand-heading hover:text-brand-yellow">
+                  {siteConfig.phone}
+                </a>
+              </p>
             </div>
           </div>
         </div>

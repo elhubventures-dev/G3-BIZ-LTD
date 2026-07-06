@@ -13,6 +13,12 @@ export const siteConfig = {
   whatsapp: "237653552562",
 } as const;
 
+export const aboutNavItems = [
+  { label: "About Us", href: "/about-us" },
+  { label: "Our Team", href: "/teams" },
+  { label: "Reviews", href: "/reviews" },
+] as const;
+
 export const primaryNavItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about-us" },

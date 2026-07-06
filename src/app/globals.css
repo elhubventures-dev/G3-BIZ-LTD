@@ -162,3 +162,17 @@ a {
   border-color: var(--brand-primary);
   color: var(--brand-primary);
 }
+
+.nav-corporate-bar {
+  height: 2.75rem;
+  border: 1px solid var(--brand-border);
+  border-radius: 0.25rem;
+  background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  overflow: visible;
+}
+
+.nav-menu-item {
+  white-space: nowrap;
+}
+
