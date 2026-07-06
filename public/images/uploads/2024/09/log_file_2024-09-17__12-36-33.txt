@@ -1,0 +1,49 @@
+
+---Downloaded files---
+The import files for: Import wintem Home Four were successfully downloaded!
+Initial max execution time = 300
+Files info:
+Site URL = https://g3-bizltd.com
+Data file = /home/u196234866/domains/g3-bizltd.com/public_html/wp-content/themes/wintem/sample-data/contents-demo.xml
+Widget file = /home/u196234866/domains/g3-bizltd.com/public_html/wp-content/themes/wintem/sample-data/widget-settings.json
+Customizer file = /home/u196234866/domains/g3-bizltd.com/public_html/wp-content/themes/wintem/sample-data/customizer-data.dat
+Redux files:
+not defined!
+
+---Importing widgets---
+Primary Sidebar : 
+
+Wintem Search - No Title - Widget already exists
+Categories - Categories - Widget already exists
+Wintem Recent Posts - Recent Post - Widget already exists
+Tag Cloud - Popular Tags - Widget already exists
+
+Project Sidebar : 
+
+Custom HTML - No Title - Widget already exists
+Custom HTML - No Title - Widget already exists
+
+Services Sidebar : 
+
+Custom HTML - No Title - Widget already exists
+Custom HTML - No Title - Widget already exists
+
+Footer One Widget : 
+
+Text - Services link - Widget already exists
+
+Footer Two Widget : 
+
+Text - Subscribe - Widget already exists
+
+Brand Footer : 
+
+Text - No Title - Widget already exists
+
+
+
+---Importing customizer settings---
+Error: The customizer import file is not in a correct format. Please make sure to use the correct customizer import file.
+
+---ocdi/after_import---
+
