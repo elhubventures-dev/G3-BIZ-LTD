@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/layout/PageHero";
+import { AnimatedContent } from "@/components/shared/AnimatedContent";
 import { ContentRenderer } from "@/components/shared/ContentRenderer";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { getAllServices, getService } from "@/lib/content";
@@ -47,9 +48,12 @@ export default async function ServiceDetailPage({
       />
       <article className="py-16">
         <div className="mx-auto max-w-4xl px-4">
-          <ContentRenderer html={service.html} />
+          <AnimatedContent>
+            <ContentRenderer html={service.html} />
+          </AnimatedContent>
           {isCustomerCreation && (
-            <div className="mt-8 rounded-2xl border border-brand-yellow/30 bg-brand-light p-6">
+            <AnimatedContent className="mt-8">
+              <div className="rounded-2xl border border-brand-yellow/30 bg-brand-light p-6">
               <h3 className="font-serif text-xl font-bold text-brand-heading">
                 Ready to register?
               </h3>
@@ -60,7 +64,8 @@ export default async function ServiceDetailPage({
               <Link href="/contact-us" className="btn-primary mt-4 inline-block">
                 Contact Us
               </Link>
-            </div>
+              </div>
+            </AnimatedContent>
           )}
         </div>
       </article>

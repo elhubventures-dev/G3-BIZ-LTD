@@ -19,6 +19,7 @@ import {
   moreNavItems,
 } from "@/config/site";
 import { getAllServices } from "@/lib/content";
+import { QuoteButton } from "@/components/shared/QuoteButton";
 import { cn } from "@/lib/utils";
 
 const servicesNavItems = getAllServices().map((s) => ({
@@ -366,9 +367,12 @@ export function Header() {
               <Phone className="h-4 w-4 text-brand-yellow" />
               {siteConfig.phone}
             </a>
-            <Link href="/contact-us" className="btn-primary w-full !rounded !text-sm" onClick={() => setMobileOpen(false)}>
+            <QuoteButton
+              className="btn-primary w-full !rounded !text-sm"
+              onOpen={() => setMobileOpen(false)}
+            >
               Get a Quote
-            </Link>
+            </QuoteButton>
           </div>
         </div>
       </div>

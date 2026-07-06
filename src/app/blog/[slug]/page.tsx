@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/layout/PageHero";
+import { AnimatedContent } from "@/components/shared/AnimatedContent";
 import { ContentRenderer } from "@/components/shared/ContentRenderer";
 import { getAllPosts, getPost } from "@/lib/content";
 import { siteConfig } from "@/config/site";
@@ -43,7 +44,9 @@ export default async function BlogPostPage({
       />
       <article className="py-16">
         <div className="mx-auto max-w-4xl px-4">
-          <ContentRenderer html={post.html} />
+          <AnimatedContent>
+            <ContentRenderer html={post.html} />
+          </AnimatedContent>
         </div>
       </article>
     </>

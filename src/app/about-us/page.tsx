@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/PageHero";
+import { AnimatedContent } from "@/components/shared/AnimatedContent";
 import { ContentRenderer } from "@/components/shared/ContentRenderer";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { TeamSection } from "@/components/sections/TeamSection";
@@ -26,7 +27,9 @@ export default function AboutPage() {
       {page?.html && (
         <section className="py-12">
           <div className="mx-auto max-w-4xl px-4">
-            <ContentRenderer html={page.html} />
+            <AnimatedContent>
+              <ContentRenderer html={page.html} />
+            </AnimatedContent>
           </div>
         </section>
       )}

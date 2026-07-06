@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/PageHero";
+import { AnimatedContent } from "@/components/shared/AnimatedContent";
 import { ContentRenderer } from "@/components/shared/ContentRenderer";
 import { getPage } from "@/lib/content";
 import { siteConfig } from "@/config/site";
@@ -22,7 +23,9 @@ export default function ReviewsPage() {
       <section className="py-16">
         <div className="mx-auto max-w-4xl px-4">
           {page?.html ? (
-            <ContentRenderer html={page.html} />
+            <AnimatedContent>
+              <ContentRenderer html={page.html} />
+            </AnimatedContent>
           ) : (
             <p className="text-brand-body">Reviews coming soon.</p>
           )}

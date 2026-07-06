@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
+import { QuoteButton } from "@/components/shared/QuoteButton";
 import { getAllProducts, getProduct } from "@/lib/content";
 import {
   getProductCategory,
@@ -85,10 +86,9 @@ export default async function ProductDetailPage({
               <p className="mt-4 text-lg leading-relaxed text-brand-body">{description}</p>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/contact-us" className="btn-primary gap-2">
+                <QuoteButton product={product.title} className="btn-primary gap-2" showIcon>
                   Request a Quote
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+                </QuoteButton>
                 <Link
                   href="/services/reputable-customer-of-gcsa"
                   className="inline-flex items-center justify-center rounded-sm border-2 border-brand-charcoal px-6 py-3 text-sm font-bold text-brand-charcoal transition hover:bg-brand-charcoal hover:text-white"

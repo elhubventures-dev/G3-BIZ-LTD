@@ -3,7 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Package } from "lucide-react";
+import { Package } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { QuoteButton } from "@/components/shared/QuoteButton";
 import {
   productCategories,
   getProductCategory,
@@ -39,10 +41,10 @@ export function ProductCatalog({ products }: ProductCatalogProps) {
             type="button"
             onClick={() => setActive(cat.id)}
             className={cn(
-              "rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition",
+              "rounded-full px-5 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-300",
               active === cat.id
-                ? "bg-brand-yellow text-white shadow-sm"
-                : "border border-brand-border bg-white text-brand-heading/70 hover:border-brand-yellow hover:text-brand-heading"
+                ? "bg-brand-yellow text-white shadow-md scale-105"
+                : "border border-brand-border bg-white text-brand-heading/70 hover:border-brand-yellow hover:text-brand-heading hover:scale-105"
             )}
           >
             {cat.label}
@@ -51,14 +53,20 @@ export function ProductCatalog({ products }: ProductCatalogProps) {
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-        {filtered.map((product) => {
+        <AnimatePresence mode="popLayout">
+        {filtered.map((product, index) => {
           const meta = getProductImage(product.slug);
           const description = getProductDescription(product.slug, product.title);
 
           return (
-            <article
+            <motion.article
               key={product.slug}
-              className="group flex flex-col overflow-hidden rounded-xl border border-brand-border bg-white shadow-sm transition hover:-translate-y-1 hover:border-brand-yellow/40 hover:shadow-lg"
+              layout
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.35, delay: index * 0.04 }}
+              className="group card-modern flex flex-col"
             >
               <div className="relative flex h-52 items-center justify-center bg-gradient-to-b from-black to-[#1a1a1a] p-6">
                 <Image
@@ -87,18 +95,19 @@ export function ProductCatalog({ products }: ProductCatalogProps) {
                   >
                     Details
                   </Link>
-                  <Link
-                    href="/contact-us"
+                  <QuoteButton
+                    product={product.title}
                     className="inline-flex flex-1 items-center justify-center gap-1 rounded bg-brand-yellow px-3 py-2 text-xs font-bold uppercase tracking-wide text-white transition hover:brightness-110"
+                    showIcon
                   >
                     Quote
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
+                  </QuoteButton>
                 </div>
               </div>
-            </article>
+            </motion.article>
           );
         })}
+        </AnimatePresence>
       </div>
 
       {filtered.length === 0 && (
@@ -118,9 +127,13 @@ export function ProductHighlights() {
   return (
     <div className="grid gap-4 sm:grid-cols-3">
       {highlights.map((item, i) => (
-        <div
+        <motion.div
           key={item.label}
-          className="flex items-center gap-4 rounded-xl border border-brand-border bg-white p-5 shadow-sm"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: i * 0.1 }}
+          className="card-modern flex items-center gap-4 p-5"
         >
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-yellow text-white">
             {"icon" in item && item.icon ? (
@@ -133,7 +146,7 @@ export function ProductHighlights() {
             <p className="font-bold text-brand-heading">{item.label}</p>
             <p className="text-sm text-brand-body">{item.sub}</p>
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
   );

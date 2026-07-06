@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -23,8 +24,20 @@ const heroSlides = [
   },
 ] as const;
 
+const heroEase = [0.22, 1, 0.36, 1] as [number, number, number, number];
+
+const textVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.15 + i * 0.12, duration: 0.7, ease: heroEase },
+  }),
+};
+
 export function Hero() {
   const [current, setCurrent] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -36,35 +49,78 @@ export function Hero() {
 
   return (
     <section className="relative flex min-h-[85vh] items-center overflow-hidden bg-brand-charcoal">
-      {heroSlides.map((slide, index) => (
-        <Image
-          key={slide.src}
-          src={slide.src}
-          alt={slide.alt}
-          fill
-          priority={index === 0}
-          className={cn(
-            "object-cover object-center transition-opacity duration-1000 ease-in-out",
-            index === current ? "opacity-100" : "opacity-0"
-          )}
-          sizes="100vw"
-        />
-      ))}
+      <AnimatePresence mode="sync">
+        {heroSlides.map((slide, index) =>
+          index === current ? (
+            <motion.div
+              key={slide.src}
+              className="absolute inset-0"
+              initial={prefersReducedMotion ? false : { opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={prefersReducedMotion ? undefined : { opacity: 0 }}
+              transition={{ duration: 1.2, ease: heroEase }}
+            >
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                priority={index === 0}
+                className="object-cover object-center"
+                sizes="100vw"
+              />
+            </motion.div>
+          ) : null
+        )}
+      </AnimatePresence>
 
       <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30" />
 
       <div className="relative mx-auto max-w-7xl px-4 py-24">
         <div className="max-w-3xl">
-          <span className="top-head mb-4">Est. 2005 · Limbe, Cameroon</span>
-          <h1 className="font-serif text-4xl font-bold leading-tight !text-white md:text-6xl">
+          <motion.span
+            className="top-head mb-4"
+            custom={0}
+            initial={prefersReducedMotion ? false : "hidden"}
+            animate="visible"
+            variants={textVariants}
+          >
+            Est. 2005 · Limbe, Cameroon
+          </motion.span>
+          <motion.h1
+            className="font-serif text-4xl font-bold leading-tight !text-white md:text-6xl"
+            custom={1}
+            initial={prefersReducedMotion ? false : "hidden"}
+            animate="visible"
+            variants={textVariants}
+          >
             Global Strategic Business Company
-          </h1>
-          <span className="hero-brand-badge">(G3-Biz Ltd)</span>
-          <p className="mt-6 text-lg text-gray-200 md:text-xl">
+          </motion.h1>
+          <motion.span
+            className="hero-brand-badge"
+            custom={2}
+            initial={prefersReducedMotion ? false : "hidden"}
+            animate="visible"
+            variants={textVariants}
+          >
+            (G3-Biz Ltd)
+          </motion.span>
+          <motion.p
+            className="mt-6 text-lg text-gray-200 md:text-xl"
+            custom={3}
+            initial={prefersReducedMotion ? false : "hidden"}
+            animate="visible"
+            variants={textVariants}
+          >
             Cameroon&apos;s most trusted beverage distribution partner — delivering Guinness,
             Diageo, and world-class products across the South West Region.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
+          </motion.p>
+          <motion.div
+            className="mt-8 flex flex-wrap gap-4"
+            custom={4}
+            initial={prefersReducedMotion ? false : "hidden"}
+            animate="visible"
+            variants={textVariants}
+          >
             <Link href="/services" className="btn-primary gap-2">
               Our Services
               <ArrowRight className="h-4 w-4" />
@@ -72,7 +128,7 @@ export function Hero() {
             <Link href="/our-products" className="btn-outline gap-2">
               View Products
             </Link>
-          </div>
+          </motion.div>
         </div>
       </div>
 

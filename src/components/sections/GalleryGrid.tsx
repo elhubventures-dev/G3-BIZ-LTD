@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import type { GalleryCategory } from "@/lib/content";
 
@@ -77,10 +78,10 @@ export function GalleryGrid({ categories }: GalleryGridProps) {
         <button
           type="button"
           onClick={() => setActive("all")}
-          className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+          className={`rounded-full px-4 py-2 text-sm font-bold transition-all duration-300 ${
             active === "all"
-              ? "bg-brand-charcoal text-white"
-              : "bg-brand-light text-brand-heading hover:bg-brand-yellow hover:text-white"
+              ? "bg-brand-charcoal text-white shadow-md scale-105"
+              : "bg-brand-light text-brand-heading hover:bg-brand-yellow hover:text-white hover:scale-105"
           }`}
         >
           All
@@ -90,10 +91,10 @@ export function GalleryGrid({ categories }: GalleryGridProps) {
             key={cat.slug}
             type="button"
             onClick={() => setActive(cat.slug)}
-            className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+            className={`rounded-full px-4 py-2 text-sm font-bold transition-all duration-300 ${
               active === cat.slug
-                ? "bg-brand-charcoal text-white"
-                : "bg-brand-light text-brand-heading hover:bg-brand-yellow hover:text-white"
+                ? "bg-brand-charcoal text-white shadow-md scale-105"
+                : "bg-brand-light text-brand-heading hover:bg-brand-yellow hover:text-white hover:scale-105"
             }`}
           >
             {cat.title}
@@ -102,9 +103,15 @@ export function GalleryGrid({ categories }: GalleryGridProps) {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <AnimatePresence mode="popLayout">
         {images.map((item, i) => (
-          <button
-            key={`${item.src}-${i}`}
+          <motion.button
+            key={`${item.src}-${active}`}
+            layout
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.35, delay: i * 0.03 }}
             type="button"
             onClick={() => setLightboxIndex(i)}
             className="group relative aspect-square overflow-hidden rounded-2xl bg-brand-charcoal text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-yellow focus-visible:ring-offset-2"
@@ -114,18 +121,22 @@ export function GalleryGrid({ categories }: GalleryGridProps) {
               src={item.src}
               alt={item.category || "G3-Biz gallery"}
               fill
-              className="object-cover transition duration-300 group-hover:scale-105"
+              className="object-cover transition duration-500 group-hover:scale-110"
               sizes="(max-width: 768px) 50vw, 25vw"
             />
-            <span className="absolute inset-0 flex items-center justify-center bg-black/0 transition group-hover:bg-black/30">
-              <ZoomIn className="h-8 w-8 text-white opacity-0 transition group-hover:opacity-100" />
+            <span className="absolute inset-0 flex items-center justify-center bg-black/0 transition duration-300 group-hover:bg-black/40">
+              <ZoomIn className="h-8 w-8 text-white opacity-0 transition duration-300 group-hover:opacity-100 group-hover:scale-110" />
             </span>
-          </button>
+          </motion.button>
         ))}
+        </AnimatePresence>
       </div>
 
       {current && lightboxIndex !== null && (
-        <div
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           className="fixed inset-0 z-[70] flex items-center justify-center bg-black/90 p-4"
           role="dialog"
           aria-modal="true"
@@ -192,7 +203,7 @@ export function GalleryGrid({ categories }: GalleryGridProps) {
               )}
             </p>
           </div>
-        </div>
+        </motion.div>
       )}
     </div>
   );

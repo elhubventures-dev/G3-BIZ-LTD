@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { PageHero } from "@/components/layout/PageHero";
 import { ProductCatalog, ProductHighlights } from "@/components/sections/ProductCatalog";
+import { QuoteButton } from "@/components/shared/QuoteButton";
 import { getAllProducts } from "@/lib/content";
 import { siteConfig } from "@/config/site";
 
@@ -95,13 +95,12 @@ export default function ProductsPage() {
               Contact our depot team for pricing, delivery schedules, and customer registration.
             </p>
           </div>
-          <Link
-            href="/contact-us"
+          <QuoteButton
             className="inline-flex shrink-0 items-center gap-2 rounded bg-black px-6 py-3 text-sm font-bold text-white transition hover:bg-black/85"
+            showIcon
           >
             Request a Quote
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+          </QuoteButton>
         </div>
       </section>
     </>

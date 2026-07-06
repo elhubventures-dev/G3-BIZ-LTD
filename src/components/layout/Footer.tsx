@@ -32,7 +32,7 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h3 className="mb-4 text-xs font-bold uppercase tracking-widest text-white">
+      <h3 className="mb-4 text-xs font-bold uppercase tracking-widest !text-white">
         {title}
         <span className="mt-2 block h-0.5 w-8 bg-brand-yellow" />
       </h3>
