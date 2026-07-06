@@ -153,6 +153,8 @@ type AnimatedCounterProps = {
   value: string;
   label: string;
   className?: string;
+  valueClassName?: string;
+  labelClassName?: string;
 };
 
 function parseNumericValue(value: string): { num: number; suffix: string } {
@@ -162,7 +164,13 @@ function parseNumericValue(value: string): { num: number; suffix: string } {
   return { num: isNaN(num) ? 0 : num, suffix: match[2] };
 }
 
-export function AnimatedCounter({ value, label, className }: AnimatedCounterProps) {
+export function AnimatedCounter({
+  value,
+  label,
+  className,
+  valueClassName,
+  labelClassName,
+}: AnimatedCounterProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.5 });
   const prefersReducedMotion = useReducedMotion();
@@ -195,8 +203,8 @@ export function AnimatedCounter({ value, label, className }: AnimatedCounterProp
 
   return (
     <div ref={ref} className={cn("text-center", className)}>
-      <p className="text-4xl font-extrabold text-white md:text-5xl">{display}</p>
-      <p className="mt-1 text-sm font-semibold text-white/90">{label}</p>
+      <p className={cn("text-4xl font-extrabold text-white md:text-5xl", valueClassName)}>{display}</p>
+      <p className={cn("mt-1 text-sm font-semibold text-white/90", labelClassName)}>{label}</p>
     </div>
   );
 }

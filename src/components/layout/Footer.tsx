@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
-  ArrowRight,
   Clock,
   Mail,
   MapPin,
@@ -57,27 +56,6 @@ export function Footer() {
 
   return (
     <footer className="on-dark bg-black text-white/70">
-      {/* CTA band */}
-      <div className="border-b border-white/10 bg-brand-yellow">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 px-4 py-8 sm:flex-row sm:items-center">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-white/80">
-              Partner with G3-Biz
-            </p>
-            <h2 className="mt-1 font-serif text-2xl font-bold text-white md:text-3xl">
-              Ready to distribute with Cameroon&apos;s trusted partner?
-            </h2>
-          </div>
-          <Link
-            href="/contact-us"
-            className="inline-flex shrink-0 items-center gap-2 rounded bg-black px-6 py-3 text-sm font-bold text-white transition hover:bg-black/85"
-          >
-            Get in Touch
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </div>
-
       {/* Main footer */}
       <div className="mx-auto max-w-7xl px-4 py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">

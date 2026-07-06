@@ -48,8 +48,13 @@ export function ContactForm() {
               {[
                 {
                   icon: Phone,
-                  href: `tel:${siteConfig.phone}`,
+                  href: `tel:${siteConfig.phone.replace(/\s/g, "")}`,
                   label: siteConfig.phone,
+                },
+                {
+                  icon: Phone,
+                  href: `tel:${siteConfig.phoneAlt.replace(/\s/g, "")}`,
+                  label: siteConfig.phoneAlt,
                 },
                 {
                   icon: Mail,
@@ -73,7 +78,10 @@ export function ContactForm() {
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-yellow">
                   <MapPin className="h-5 w-5 text-white" />
                 </div>
-                <span className="font-medium">{siteConfig.address}</span>
+                <div>
+                  <span className="font-medium">{siteConfig.address}</span>
+                  <p className="mt-1 text-sm text-brand-body">{siteConfig.poBox}</p>
+                </div>
               </li>
             </ul>
           </AnimateIn>

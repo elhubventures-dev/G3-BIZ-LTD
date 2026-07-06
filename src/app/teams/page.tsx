@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/PageHero";
-import { ContentRenderer } from "@/components/shared/ContentRenderer";
-import { getPage } from "@/lib/content";
+import { TeamsPageContent } from "@/components/sections/team/TeamsPageContent";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -10,22 +9,14 @@ export const metadata: Metadata = {
 };
 
 export default function TeamsPage() {
-  const page = getPage("teams");
-
   return (
     <>
       <PageHero
         title="Our Team"
+        subtitle="Leadership, depot operations, and field squads driving distribution across Limbe"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Teams" }]}
-        image="/images/uploads/2024/08/WhatsApp-Image-2024-08-20-at-19.18.13-3.jpeg"
       />
-      {page?.html && (
-        <section className="py-12">
-          <div className="mx-auto max-w-7xl px-4">
-            <ContentRenderer html={page.html} />
-          </div>
-        </section>
-      )}
+      <TeamsPageContent />
     </>
   );
 }

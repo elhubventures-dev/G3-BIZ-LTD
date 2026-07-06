@@ -17,6 +17,12 @@ const nextConfig: NextConfig = {
       // WordPress category/tag
       { source: "/category/:slug", destination: "/blog", permanent: true },
       { source: "/tag/:slug", destination: "/blog", permanent: true },
+      // Removed spam post (injected pharma content)
+      {
+        source: "/blog/tadagra-what-to-know-warnings-results",
+        destination: "/blog",
+        permanent: true,
+      },
       // WordPress admin/login
       { source: "/wp-admin/:path*", destination: "/", permanent: false },
       { source: "/wp-login.php", destination: "/", permanent: false },

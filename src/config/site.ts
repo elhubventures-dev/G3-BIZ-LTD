@@ -13,10 +13,11 @@ export const siteConfig = {
   whatsapp: "237653552562",
 } as const;
 
+/** Shared inner-page hero background (G3-Biz depot & fleet) */
+export const pageHeroImage = "/images/hero-slide-1.png";
+
 export const aboutNavItems = [
   { label: "About Us", href: "/about-us" },
-  { label: "Our Team", href: "/teams" },
-  { label: "Reviews", href: "/reviews" },
 ] as const;
 
 export const primaryNavItems = [
@@ -24,15 +25,13 @@ export const primaryNavItems = [
   { label: "About", href: "/about-us" },
   { label: "Services", href: "/services" },
   { label: "Products", href: "/our-products" },
-  { label: "Teams", href: "/teams" },
+  { label: "Our Team", href: "/teams" },
   { label: "Contact", href: "/contact-us" },
 ] as const;
 
 export const moreNavItems = [
   { label: "Projects", href: "/projects" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Blog", href: "/blog" },
-  { label: "Policies", href: "/policies" },
   { label: "Reviews", href: "/reviews" },
 ] as const;
 
@@ -82,9 +81,9 @@ export const teamMembers = [
     image: "/images/uploads/2024/08/WhatsApp-Image-2024-08-20-at-19.18.14-3-e1725983060288.jpeg",
   },
   {
-    name: "Constance Njumanuh A.",
+    name: "",
     role: "HOD Human Resource & Administration",
-    image: "/images/uploads/2024/09/333333333333.png",
+    image: "/images/team-member-placeholder.svg",
   },
   {
     name: "Herman Ache Ayiseh",

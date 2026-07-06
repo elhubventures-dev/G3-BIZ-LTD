@@ -33,19 +33,28 @@ export interface ContentData {
 
 const data = contentData as ContentData;
 
+/** WordPress spam posts injected by hackers — not legitimate G3-Biz content */
+const EXCLUDED_POST_SLUGS = new Set(["tadagra-what-to-know-warnings-results"]);
+
+function isExcludedPost(post: ContentPost) {
+  return EXCLUDED_POST_SLUGS.has(post.slug);
+}
+
 export function getPage(slug: string): ContentPost | undefined {
   return data.pages.find((p) => p.slug === slug);
 }
 
 export function getPost(slug: string): ContentPost | undefined {
   const decoded = decodeURIComponent(slug);
-  return data.posts.find(
+  const post = data.posts.find(
     (p) => p.slug === slug || p.slug === decoded || decodeURIComponent(p.slug) === decoded
   );
+  if (!post || isExcludedPost(post)) return undefined;
+  return post;
 }
 
 export function getAllPosts(): ContentPost[] {
-  return data.posts;
+  return data.posts.filter((p) => !isExcludedPost(p));
 }
 
 export function getAllProducts(): ContentPost[] {

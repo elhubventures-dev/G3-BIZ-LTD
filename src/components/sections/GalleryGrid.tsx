@@ -16,7 +16,7 @@ interface GalleryImage {
 }
 
 export function GalleryGrid({ categories }: GalleryGridProps) {
-  const [active, setActive] = useState(categories[0]?.slug ?? "all");
+  const [active, setActive] = useState("all");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const allImages = categories.flatMap((c) =>

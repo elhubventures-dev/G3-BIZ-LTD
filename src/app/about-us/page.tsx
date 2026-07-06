@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/PageHero";
-import { AnimatedContent } from "@/components/shared/AnimatedContent";
-import { ContentRenderer } from "@/components/shared/ContentRenderer";
-import { AboutSection } from "@/components/sections/AboutSection";
-import { TeamSection } from "@/components/sections/TeamSection";
-import { ContactForm } from "@/components/sections/ContactForm";
-import { getPage } from "@/lib/content";
+import { AboutPageContent } from "@/components/sections/about/AboutPageContent";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -14,27 +9,14 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const page = getPage("about-us");
-
   return (
     <>
       <PageHero
         title="About Us"
+        subtitle="Building trust through distribution excellence since 2005"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "About Us" }]}
-        image="/images/uploads/2024/09/WhatsApp-Image-2024-08-20-at-19.18.07-1-e1726051069740.jpeg"
       />
-      <AboutSection />
-      {page?.html && (
-        <section className="py-12">
-          <div className="mx-auto max-w-4xl px-4">
-            <AnimatedContent>
-              <ContentRenderer html={page.html} />
-            </AnimatedContent>
-          </div>
-        </section>
-      )}
-      <TeamSection />
-      <ContactForm />
+      <AboutPageContent />
     </>
   );
 }

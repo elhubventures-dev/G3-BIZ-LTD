@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/PageHero";
-import { AnimatedContent } from "@/components/shared/AnimatedContent";
-import { ContentRenderer } from "@/components/shared/ContentRenderer";
-import { getPage } from "@/lib/content";
+import { ProjectsPageContent } from "@/components/sections/projects/ProjectsPageContent";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -11,25 +9,14 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
-  const page = getPage("projects");
-
   return (
     <>
       <PageHero
         title="Projects"
+        subtitle="Ongoing initiatives advancing distribution excellence and market growth across Limbe"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Projects" }]}
       />
-      <section className="py-16">
-        <div className="mx-auto max-w-4xl px-4">
-          {page?.html ? (
-            <AnimatedContent>
-              <ContentRenderer html={page.html} />
-            </AnimatedContent>
-          ) : (
-            <p className="text-brand-body">Projects information coming soon.</p>
-          )}
-        </div>
-      </section>
+      <ProjectsPageContent />
     </>
   );
 }

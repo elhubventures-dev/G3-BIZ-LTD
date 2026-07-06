@@ -6,13 +6,15 @@ import {
   StaggerContainer,
   StaggerItem,
 } from "@/components/shared/motion";
+import { TeamMemberCard } from "@/components/sections/team/TeamMemberCard";
 
 interface TeamSectionProps {
   limit?: number;
 }
 
 export function TeamSection({ limit = 4 }: TeamSectionProps) {
-  const members = limit ? teamMembers.slice(0, limit) : teamMembers;
+  const members = teamMembers.slice(0, limit);
+
   return (
     <section className="py-20">
       <div className="mx-auto max-w-7xl px-4">
@@ -35,24 +37,8 @@ export function TeamSection({ limit = 4 }: TeamSectionProps) {
 
         <StaggerContainer className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {members.map((member) => (
-            <StaggerItem key={member.name}>
-              <div className="group card-modern">
-                <div className="relative h-64 overflow-hidden img-zoom">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-cover object-top transition duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/90 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-white">
-                      {member.role}
-                    </p>
-                    <h3 className="text-lg font-bold text-white">{member.name}</h3>
-                  </div>
-                </div>
-              </div>
+            <StaggerItem key={member.role}>
+              <TeamMemberCard member={member} />
             </StaggerItem>
           ))}
         </StaggerContainer>

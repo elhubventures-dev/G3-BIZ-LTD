@@ -207,7 +207,9 @@ export function Header() {
             </Link>
 
             <NavDivider />
-            <NavDropdown label="About" items={aboutNavItems} />
+            <NavLink href="/about-us" label="About" />
+            <NavDivider />
+            <NavLink href="/teams" label="Our Team" />
             <NavDivider />
             <NavDropdown
               label="Services"
@@ -221,8 +223,19 @@ export function Header() {
             <NavLink href="/blog" label="Blog" />
             <NavDivider />
             <NavDropdown label="More" items={moreNavItems} />
-            <NavDivider />
-            <NavLink href="/contact-us" label="Contact" />
+            <div className="flex items-center px-3">
+              <Link
+                href="/contact-us"
+                className={cn(
+                  "inline-flex items-center rounded-sm px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors",
+                  isActive(pathname, "/contact-us")
+                    ? "bg-brand-yellow text-white"
+                    : "bg-brand-yellow text-white hover:bg-brand-yellow/90"
+                )}
+              >
+                Contact
+              </Link>
+            </div>
 
             <form
               onSubmit={handleSearch}
@@ -323,6 +336,17 @@ export function Header() {
               </Link>
             ))}
 
+            <Link
+              href="/teams"
+              onClick={() => setMobileOpen(false)}
+              className={cn(
+                "mt-1 block rounded-lg px-3 py-2.5 text-sm font-bold uppercase tracking-wide",
+                isActive(pathname, "/teams") ? "text-brand-yellow" : "text-brand-heading hover:bg-brand-light"
+              )}
+            >
+              Our Team
+            </Link>
+
             <p className="px-3 pb-1 pt-3 text-xs font-bold uppercase tracking-widest text-brand-body/60">Services</p>
             <Link href="/services" onClick={() => setMobileOpen(false)} className="block rounded-lg px-3 py-2.5 text-sm font-medium text-brand-heading hover:bg-brand-light">
               All Services
@@ -346,8 +370,22 @@ export function Header() {
               { label: "Products", href: "/our-products" },
               { label: "Blog", href: "/blog" },
               { label: "Contact", href: "/contact-us" },
-              ...moreNavItems,
             ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={cn(
+                  "block rounded-lg px-3 py-2.5 text-sm font-medium",
+                  isActive(pathname, item.href) ? "text-brand-yellow" : "text-brand-heading hover:bg-brand-light"
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            <p className="px-3 pb-1 pt-3 text-xs font-bold uppercase tracking-widest text-brand-body/60">More</p>
+            {moreNavItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

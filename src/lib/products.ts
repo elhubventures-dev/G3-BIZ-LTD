@@ -23,7 +23,7 @@ export const productMeta: Record<string, ProductMeta> = {
       "World-famous Irish stout with a deep, dark colour and rich creamy head — one of the most iconic beers globally.",
   },
   "small-guinness-s": {
-    image: "/images/uploads/2024/09/1.png",
+    image: "/images/uploads/2024/09/6.png",
     category: "guinness",
     description: "Compact format Guinness stout, perfect for retail outlets and on-the-go consumption.",
   },
@@ -35,12 +35,12 @@ export const productMeta: Record<string, ProductMeta> = {
       "A lighter, more approachable Guinness with a milder flavour profile and smooth finish.",
   },
   "malta-guiness": {
-    image: "/images/uploads/2024/09/4.png",
+    image: "/images/uploads/2024/09/3.png",
     category: "guinness",
     description: "Non-alcoholic malt drink with the distinctive Guinness character and nourishing taste.",
   },
   harp: {
-    image: "/images/uploads/2024/09/3.png",
+    image: "/images/uploads/2024/09/1.png",
     category: "other",
     description: "Premium lager with a crisp, refreshing taste — a favourite across Cameroon.",
   },
@@ -57,7 +57,7 @@ export const productMeta: Record<string, ProductMeta> = {
     description: "Bold vodka-based ready-to-drink with a smooth, premium taste for adult consumers.",
   },
   "smirnoff-ice-pineapple": {
-    image: "/images/uploads/2024/09/6.png",
+    image: "/images/uploads/2024/09/4.png",
     category: "smirnoff",
     description: "Tropical pineapple-flavoured vodka cooler — light, fruity, and refreshing.",
   },

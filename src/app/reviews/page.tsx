@@ -1,36 +1,22 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/layout/PageHero";
-import { AnimatedContent } from "@/components/shared/AnimatedContent";
-import { ContentRenderer } from "@/components/shared/ContentRenderer";
-import { getPage } from "@/lib/content";
+import { ReviewsPageContent } from "@/components/sections/reviews/ReviewsPageContent";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Reviews",
-  description: `Customer reviews and testimonials for ${siteConfig.shortName}.`,
+  description: `Customer reviews and testimonials for ${siteConfig.shortName} — trusted beverage distribution in Limbe, Cameroon.`,
 };
 
 export default function ReviewsPage() {
-  const page = getPage("reviews");
-
   return (
     <>
       <PageHero
-        title="Reviews"
+        title="Client Reviews"
+        subtitle="What retailers, hospitality partners, and buyers say about our service"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Reviews" }]}
-        image="/images/uploads/2024/08/WhatsApp-Image-2024-08-20-at-19.18.07.jpeg"
       />
-      <section className="py-16">
-        <div className="mx-auto max-w-4xl px-4">
-          {page?.html ? (
-            <AnimatedContent>
-              <ContentRenderer html={page.html} />
-            </AnimatedContent>
-          ) : (
-            <p className="text-brand-body">Reviews coming soon.</p>
-          )}
-        </div>
-      </section>
+      <ReviewsPageContent />
     </>
   );
 }

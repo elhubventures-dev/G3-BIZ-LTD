@@ -23,7 +23,6 @@ export default function ProductsPage() {
       <PageHero
         title="Our Products"
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Products" }]}
-        image="/images/uploads/2024/08/GUINNESS-1-696x696-1.png"
       />
 
       {/* Intro */}
@@ -87,18 +86,15 @@ export default function ProductsPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-brand-yellow py-12">
+      <section className="border-t border-brand-border bg-white py-12">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 text-center sm:flex-row sm:text-left">
           <div>
-            <h2 className="font-serif text-2xl font-bold text-white">Need a bulk order or new account?</h2>
-            <p className="mt-1 text-white/85">
+            <h2 className="font-serif text-2xl font-bold text-brand-heading">Need a bulk order or new account?</h2>
+            <p className="mt-1 text-brand-body">
               Contact our depot team for pricing, delivery schedules, and customer registration.
             </p>
           </div>
-          <QuoteButton
-            className="inline-flex shrink-0 items-center gap-2 rounded bg-black px-6 py-3 text-sm font-bold text-white transition hover:bg-black/85"
-            showIcon
-          >
+          <QuoteButton className="btn-primary shrink-0 !px-6 !py-3 !text-sm" showIcon>
             Request a Quote
           </QuoteButton>
         </div>
