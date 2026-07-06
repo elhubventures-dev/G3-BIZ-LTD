@@ -4,6 +4,7 @@ export const siteConfig = {
   description:
     "G3-Biz Ltd — Cameroon's trusted beverage distribution partner. Primary and secondary distribution of Guinness and Diageo products in Limbe.",
   url: "https://g3-bizltd.com",
+  logo: "/images/logo.png",
   email: "info@g3-bizltd.com",
   phone: "+237 6 53 55 25 62",
   phoneAlt: "+237 681 966 816",

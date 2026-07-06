@@ -30,14 +30,28 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.shortName}`,
   },
   description: siteConfig.description,
+  icons: {
+    icon: siteConfig.logo,
+    shortcut: siteConfig.logo,
+    apple: siteConfig.logo,
+  },
   openGraph: {
     type: "website",
     siteName: siteConfig.shortName,
     locale: "en_CM",
     url: siteConfig.url,
+    images: [
+      {
+        url: siteConfig.logo,
+        width: 512,
+        height: 512,
+        alt: siteConfig.shortName,
+      },
+    ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
+    images: [siteConfig.logo],
   },
   robots: { index: true, follow: true },
 };
