@@ -14,6 +14,7 @@ import { InternshipPostContent } from "@/components/sections/blog/InternshipPost
 import { LabourDayPostContent } from "@/components/sections/blog/LabourDayPostContent";
 import { MarketingOfficerPostContent } from "@/components/sections/blog/MarketingOfficerPostContent";
 import { RelaunchPostContent } from "@/components/sections/blog/RelaunchPostContent";
+import { SecurityGuardPostContent } from "@/components/sections/blog/SecurityGuardPostContent";
 import { TuesdayMeetingsPostContent } from "@/components/sections/blog/TuesdayMeetingsPostContent";
 import {
   isWcwPostSlug,
@@ -245,6 +246,24 @@ export default async function BlogPostPage({
           image="/images/uploads/2026/04/Marketing-Officer-Edited-scaled.png"
         />
         <MarketingOfficerPostContent />
+      </>
+    );
+  }
+
+  if (slug === "job-vacancy-call-security-guard") {
+    return (
+      <>
+        <PageHero
+          title="Job Vacancy: Security Guard"
+          subtitle="One full-time role in Limbe — protect people, stock, vehicles, and depot operations"
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Blog", href: "/blog" },
+            { label: "Security Guard" },
+          ]}
+          image="/images/uploads/2026/08/security-guard-vacancy.png"
+        />
+        <SecurityGuardPostContent />
       </>
     );
   }

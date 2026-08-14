@@ -53,8 +53,19 @@ export function getPost(slug: string): ContentPost | undefined {
   return post;
 }
 
+const IMAGE_EXT = /\.(jpe?g|png|webp|avif|gif)$/i;
+
 export function getAllPosts(): ContentPost[] {
-  return data.posts.filter((p) => !isExcludedPost(p));
+  return data.posts
+    .filter((p) => !isExcludedPost(p))
+    .slice()
+    .sort((a, b) => b.id - a.id);
+}
+
+/** First usable cover photo — skips videos and other non-image paths. */
+export function getPostCoverImage(images: string[] | undefined): string | null {
+  if (!images?.length) return null;
+  return images.find((img) => img.startsWith("/images/") && IMAGE_EXT.test(img)) ?? null;
 }
 
 export function getAllProducts(): ContentPost[] {

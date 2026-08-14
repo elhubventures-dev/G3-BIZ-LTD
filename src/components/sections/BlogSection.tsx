@@ -1,17 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getAllPosts } from "@/lib/content";
+import { getAllPosts, getPostCoverImage } from "@/lib/content";
 import { ArrowRight } from "lucide-react";
 import {
   AnimateIn,
   StaggerContainer,
   StaggerItem,
 } from "@/components/shared/motion";
-
-function getPostImage(images: string[]): string | null {
-  const local = images.find((img) => img.startsWith("/images/"));
-  return local ?? null;
-}
 
 export function BlogSection() {
   const posts = getAllPosts().slice(0, 3);
@@ -39,11 +34,14 @@ export function BlogSection() {
 
         <StaggerContainer className="mt-12 grid gap-8 md:grid-cols-3">
           {posts.map((post) => {
-            const image = getPostImage(post.images);
+            const image = getPostCoverImage(post.images);
             return (
-              <StaggerItem key={post.id}>
-                <Link href={`/blog/${encodeURIComponent(post.slug)}`} className="group card-modern block">
-                  <div className="relative h-48 overflow-hidden bg-brand-charcoal img-zoom">
+              <StaggerItem key={post.id} className="h-full">
+                <Link
+                  href={`/blog/${encodeURIComponent(post.slug)}`}
+                  className="group card-modern flex h-full flex-col"
+                >
+                  <div className="relative h-48 shrink-0 overflow-hidden bg-brand-charcoal img-zoom">
                     {image ? (
                       <Image
                         src={image}
@@ -57,9 +55,9 @@ export function BlogSection() {
                       </div>
                     )}
                   </div>
-                  <div className="p-6">
+                  <div className="flex min-h-[7.5rem] flex-1 flex-col p-6">
                     <span className="top-head !text-xs">G3-Biz Ltd</span>
-                    <h3 className="mt-2 font-bold text-brand-heading line-clamp-2 transition-colors group-hover:text-brand-yellow">
+                    <h3 className="mt-2 line-clamp-3 font-bold leading-snug text-brand-heading transition-colors group-hover:text-brand-yellow">
                       {post.title}
                     </h3>
                   </div>
