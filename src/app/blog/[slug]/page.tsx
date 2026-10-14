@@ -15,6 +15,7 @@ import { LabourDayPostContent } from "@/components/sections/blog/LabourDayPostCo
 import { MarketingOfficerPostContent } from "@/components/sections/blog/MarketingOfficerPostContent";
 import { RelaunchPostContent } from "@/components/sections/blog/RelaunchPostContent";
 import { SecurityGuardPostContent } from "@/components/sections/blog/SecurityGuardPostContent";
+import { StockOperatorPostContent } from "@/components/sections/blog/StockOperatorPostContent";
 import { TuesdayMeetingsPostContent } from "@/components/sections/blog/TuesdayMeetingsPostContent";
 import {
   isWcwPostSlug,
@@ -246,6 +247,24 @@ export default async function BlogPostPage({
           image="/images/uploads/2026/04/Marketing-Officer-Edited-scaled.png"
         />
         <MarketingOfficerPostContent />
+      </>
+    );
+  }
+
+  if (slug === "job-vacancy-call-stock-operator") {
+    return (
+      <>
+        <PageHero
+          title="Job Vacancy: Stock Operator"
+          subtitle="One full-time role in Limbe — handle, store, load, and offload stock with accuracy and care"
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Blog", href: "/blog" },
+            { label: "Stock Operator" },
+          ]}
+          image="/images/uploads/2026/10/stock-operator-vacancy.jpg"
+        />
+        <StockOperatorPostContent />
       </>
     );
   }
