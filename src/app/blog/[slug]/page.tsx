@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/layout/PageHero";
 import { AnimatedContent } from "@/components/shared/AnimatedContent";
+import { BrandAmbassadorPostContent } from "@/components/sections/blog/BrandAmbassadorPostContent";
 import { BusinessPromoterPostContent } from "@/components/sections/blog/BusinessPromoterPostContent";
 import { CommunityWaterPostContent } from "@/components/sections/blog/CommunityWaterPostContent";
 import { ContentRenderer } from "@/components/shared/ContentRenderer";
@@ -247,6 +248,24 @@ export default async function BlogPostPage({
           image="/images/uploads/2026/04/Marketing-Officer-Edited-scaled.png"
         />
         <MarketingOfficerPostContent />
+      </>
+    );
+  }
+
+  if (slug === "job-vacancy-call-brand-ambassador") {
+    return (
+      <>
+        <PageHero
+          title="Job Vacancy: Brand Ambassador"
+          subtitle="Five short-term roles across Limbe–Idenau — drive demand, visibility, and outlet engagement"
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Blog", href: "/blog" },
+            { label: "Brand Ambassador" },
+          ]}
+          image="/images/uploads/2026/10/brand-ambassador-vacancy.jpg"
+        />
+        <BrandAmbassadorPostContent />
       </>
     );
   }
